@@ -1,6 +1,6 @@
 // This file is part of Substrate.
 
-// Copyright (C) 2018-2020 Parity Technologies (UK) Ltd.
+// Copyright (C) 2018-2021 Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -250,6 +250,14 @@ impl<H, N> Equivocation<H, N> {
 		match self {
 			Equivocation::Prevote(ref equivocation) => &equivocation.identity,
 			Equivocation::Precommit(ref equivocation) => &equivocation.identity,
+		}
+	}
+
+	/// Returns the round number when the equivocation happened.
+	pub fn round_number(&self) -> RoundNumber {
+		match self {
+			Equivocation::Prevote(ref equivocation) => equivocation.round_number,
+			Equivocation::Precommit(ref equivocation) => equivocation.round_number,
 		}
 	}
 }
